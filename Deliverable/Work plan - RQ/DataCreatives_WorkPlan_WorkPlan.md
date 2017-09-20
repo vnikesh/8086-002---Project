@@ -8,7 +8,7 @@ Pooja
 Runhua  
 
 
-## 1. Research Questions:-  
+## 1 Research Questions:-  
 * Finding out on which claim type did all the hospital across USA has spent more and also for which period?  
 * Is the Medicare total spending different in different state?  
 * Finding the leading hospital in terms of spending based on the US zones?  
