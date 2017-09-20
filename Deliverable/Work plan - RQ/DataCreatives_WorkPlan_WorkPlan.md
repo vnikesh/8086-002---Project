@@ -92,14 +92,14 @@ a. US Health Government
 
 ## 4 Gantt Chart: -  
 
-<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="http://yoursite.com/the.pdf">
-        This browser does not support PDFs. Please download the PDF to view it:  <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+<object data="https://github.com/vnikesh/8086-002---Project/blob/master/Support%20files/DataCreative_WorkPlan%26RQ_ProjectPlan_Gant_Chart.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.com/vnikesh/8086-002---Project/blob/master/Support%20files/DataCreative_WorkPlan%26RQ_ProjectPlan_Gant_Chart.pdf">
+        This browser does not support PDFs. Please download the PDF to view it:  <a href="https://github.com/vnikesh/8086-002---Project/blob/master/Support%20files/DataCreative_WorkPlan%26RQ_ProjectPlan_Gant_Chart.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
-<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="http://yoursite.com/the.pdf">
-        This browser does not support Raw file. Please download the Raw file to view it: <a href="http://yoursite.com/the.pdf">Download MPP</a>.</p>
+<object data="https://github.com/vnikesh/8086-002---Project/blob/master/Support%20files/DataCreative_WorkPlan%26RQ_ProjectPlan_Gant_Chart.mpp" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.com/vnikesh/8086-002---Project/blob/master/Support%20files/DataCreative_WorkPlan%26RQ_ProjectPlan_Gant_Chart.mpp">
+        This browser does not support Raw file. Please download the Raw file to view it: <a href="https://github.com/vnikesh/8086-002---Project/blob/master/Support%20files/DataCreative_WorkPlan%26RQ_ProjectPlan_Gant_Chart.mpp">Download MPP</a>.</p>
     </embed>
 </object>
