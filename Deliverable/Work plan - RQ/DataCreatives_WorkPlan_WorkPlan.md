@@ -90,3 +90,16 @@ c. Finding the leading hospital in terms of spending based on the US zones?
 ## 3 Targeted Audience: -  
 a. US Health Government 
 
+## 4 Gantt Chart: -  
+
+<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="http://yoursite.com/the.pdf">
+        This browser does not support PDFs. Please download the PDF to view it:  <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+<object data="http://yoursite.com/the.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="http://yoursite.com/the.pdf">
+        This browser does not support Raw file. Please download the Raw file to view it: <a href="http://yoursite.com/the.pdf">Download MPP</a>.</p>
+    </embed>
+</object>
