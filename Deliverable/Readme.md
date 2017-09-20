@@ -3,7 +3,7 @@
 ## **1. Work Plan and RQ - Due by Sep - 21**  
    **Leader for this deliverable:** _Nikesh_
 
-## Upcoming Deliverables
+# Upcoming Deliverables
 
 ## **2. Data Cleaning and Documentation - Due Date - 10/18**  
    **Leader for this deliverable:** _Runhua_  
