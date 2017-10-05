@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Deliverables  
 
 ## **1. Work Plan and RQ - Due by Sep - 21**  
@@ -25,3 +26,6 @@
 
 ## **8. Git Package - Due Date - 11/29**
    **Leader for this deliverable:** _Nikesh_  
+=======
+Readme
+>>>>>>> 2bc92d1d7dad0000bfc67f8d43897522229b20b7
