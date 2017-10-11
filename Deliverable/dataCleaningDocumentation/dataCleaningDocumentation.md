@@ -1,6 +1,6 @@
 ##Team Name: Data Creatives
 ##Team Project: Medicare Spending per Beneficiary
-##Members: -
+##Members: -  
 Nikesh  
 Pooja  
 Runhua  
@@ -23,7 +23,7 @@ This information is provided 'as is', and this site makes no warranties on the i
 * To make analysis easier, the percentage values were formatted as number with two decimal, which is annotate by the variable (The value of all column with percentage header is percentage (%)).
 * To make analysis easier, the cost or spending were formatted as number, which all the cost or spending was with $ as units
 * Period 
-1. The periods were re-annotated as follows:     
+ **The periods were re-annotated as follows:     
  1- During Index Hospital Admission  
  2- 1 through 30 days After Discharge from Index Hospital Admission  
  3- Complete Episode  
