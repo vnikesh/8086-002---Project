@@ -26,7 +26,7 @@ This information is provided 'as is', and this site makes no warranties on the i
  **The periods were re-annotated as follows:**     
  1- During Index Hospital Admission  
  2- 1 through 30 days After Discharge from Index Hospital Admission  
- 3- 1 to 3 days Prior to Index Hospital Admission
+ 3- 1 to 3 days Prior to Index Hospital Admission  
  4 - Complete Episode  
 
 ## Data were verified by R as follows:
