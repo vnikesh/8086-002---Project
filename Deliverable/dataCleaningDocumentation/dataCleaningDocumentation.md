@@ -24,9 +24,9 @@ This information is provided 'as is', and this site makes no warranties on the i
 * To make analysis easier, the cost or spending were formatted as number, which all the cost or spending was with $ as units
 * Period 
 1. The periods were re-annotated as follows:     
-2. During Index Hospital Admission; 
-3. 1 through 30 days After Discharge from Index Hospital Admission; 
-4. Complete Episode
+ 1- During Index Hospital Admission
+ 2- 1 through 30 days After Discharge from Index Hospital Admission
+ 3- Complete Episode
 
 ## Data were verified by R as follows:
 
