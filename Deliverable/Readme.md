@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Deliverables  
 
 ## **1. Work Plan and RQ - Due by Sep - 21**  
