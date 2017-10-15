@@ -1,7 +1,6 @@
-<<<<<<< HEAD:Deliverable/Dataa Cleaning Documentation/dataCleaningDocumentation.md
-##Team Name: Data Creatives
-##Team Project: Medicare Spending per Beneficiary
-##Members: -
+##Team Name: Data Creatives  
+##Team Project: Medicare Spending per Beneficiary  
+##Members: -  
 Nikesh  
 Pooja  
 Runhua  
@@ -51,4 +50,3 @@ ncol(HospitalSpending)
 nrow(HospitalSpending)
 ```
 After cleaning up the data, there were 11 columns and 69630 rows.
->>>>>>> e28cff469779486d2349c9e1a9fb0dde1edbff7f:Deliverable/dataCleaningDocumentation/dataCleaningDocumentation.md
