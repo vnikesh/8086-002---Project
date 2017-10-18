@@ -10,9 +10,8 @@ Runhua
 
 ## 1 Research Questions:-  
 * Finding out on which claim type did all the hospital across USA has spent more and also for which period?  
-* Is the Medicare total spending different in different state?  
-* Finding the leading hospital in terms of spending based on the US zones?  
 * Finding the amount spent in each state and grouping it under highest and lowest claim states?  
+* Finding the leading hospital in terms of spending based on the US zones and also finding the difference in spending by each zones?    
 
 ## 2 Projected effort allocation and tentative timeline  
 
