@@ -9,7 +9,7 @@
 
 The data displayed here show average spending levels during hospitals. An MSPB episode includes all Medicare Part A and Part B claims paid during the period from 3 days prior to a hospital admission through 30 days after discharge. These average Medicare payment amounts have been price-standardized to remove the effect of geographic payment differences and add-on payments for indirect medical education (IME) and disproportionate share hospitals (DSH). Centers for Medicare & Medicaid Services uses the information on this web page to calculate a hospital, which is reported on Hospital Compare. The data can be downloaded from [this link](https://catalog.data.gov/dataset/medicare-hospital-spending-by-claim-61b57).  
 
-The data contain 13 Columns and 69631 rows, [see details in screen-shot](Needed to add link).
+The data contain 13 Columns and 69631 rows, [see details in screen-shot](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/Before%20Cleaning.png).
 
 ### The headers are as follows:
 | Hospital Name | Provider ID |	State |	Period | Claim Type | Avg Spending Per Episode Hospital | Avg Spending Per Episode State |	Avg Spending Per Episode Nation |Percent of Spending Hospital|Percent of Spending State|Percent of Spending Nation| Start Date| End Date|
