@@ -72,13 +72,15 @@ License: [See here for more information](http://opendefinition.org/licenses/odc-
      - **Procedure**
         - Select the required column names and replace them with their abbreviations.
 -  Removed the rows where the average spending is **0**, as it doesn't help us in the analysis.
+-  Change the values with **percentage** to **decimal** values to help in analysis.  
+
    - **Procedure**
      - Select the entire required column and hold **CTRL+H**
      - Click Find All, to see a list of cells with **0**
      - Select an item in the list, and press Ctrl+A, to select the entire list, and to select all the **0** value cells on the worksheet
      - To delete the entire row for each **0** value cell that was found:
         - On the Ribbon’s Home tab, click Delete, and then click Delete Sheet Rows.
--  ##### Change the values with **percentage** to **decimal** values to help in analysis.
+
    - **Procedure**
      - Right-click the cell you wish to change, and select "Format Cells."
      - Click the "Number" tab in the Format Cells window.
