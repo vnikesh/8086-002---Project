@@ -1,5 +1,5 @@
 ## **Team Name: _Data Creatives_**
-- **Team Project: Medicare Spending per Beneficiary**
+- **Team Project: Medicare Spending Per Beneficiary**
 - **Team Members:**
   - **Nikesh**
   - **Pooja**
@@ -32,7 +32,7 @@ This information is provided 'as is', and this site makes no warranties on the i
 ## Data clean up procedure by Microsoft Excel 2016.
 -  ##### The start date and end Date were removed because they are the same across all the rows (start date =1012015; end date = 12312015)
    - **Procedure**
-       - Select the entire column under *start date* and *end date* by clicking the column heading and hit backpsace and delete the entire data in those columns.
+       - Select the entire column under *start date* and *end date* by clicking the column heading and hit backspace and delete the entire data in those columns.
 - ##### To make analysis easier, the percentage values were formatted as number(removing the % symbol) with two decimal
     - **Procedure**
         - Select the entire required column and hold **CTRL+H**
@@ -73,7 +73,7 @@ This information is provided 'as is', and this site makes no warranties on the i
    - Percent_of_Spending_Nation         - **POS_Nation**
      - **Procedure**
         - Select the required column names and replace them with their abbreviations.
--  Removed the rows where the average spending is **0**, as it doesnt help us in the analysis.
+-  Removed the rows where the average spending is **0**, as it doesn't help us in the analysis.
 -  Change the values with **percentage** to **decimal** values to help in analysis.
 
 # Data were verified Excel:
