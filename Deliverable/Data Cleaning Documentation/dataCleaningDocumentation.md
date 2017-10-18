@@ -78,4 +78,6 @@ This information is provided 'as is', and this site makes no warranties on the i
 
 # Data were verified Excel:
 
-After cleaning up the data, there were 11 columns and 55316 rows, [see details in screen-shot](Needed to add link).
+After cleaning up the data, there were 11 columns and 55316 rows,  
+[Before Cleaning the Dataset](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/Before%20Cleaning.png)  
+[After Cleaning the Dataset](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/After%20Cleaning.png)  
