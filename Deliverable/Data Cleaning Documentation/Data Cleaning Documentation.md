@@ -72,7 +72,6 @@ License: [See here for more information](http://opendefinition.org/licenses/odc-
      - **Procedure**
         - Select the required column names and replace them with their abbreviations.
 -  Removed the rows where the average spending is **0**, as it doesn't help us in the analysis.
--  Changed the **percentage** values to **decimal** values to help us in the analysis
    - **Procedure**
      - Select the entire required column and hold **CTRL+H**
      - Click Find All, to see a list of cells with **0**
