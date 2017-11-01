@@ -212,20 +212,23 @@ anova (fit1)
 head(periodAB)
 with(periodAB, t.test(ASPE_Hospital[Period=="AfterIHA"],ASPE_Hospital[Period=="BeforeIHA"]))
 t.test(ASPE_Hospital~ Period, data = periodAB)
-with(periodAB, t.test(ASPE_Hospital[Period=="AfterIHA"],ASPE_Hospital[Period=="BeforeIHA"]))
-t.test(ASPE_Hospital~ Period, data = periodAB)
+
 
 head(periodAD)
 with(periodAD, t.test(ASPE_Hospital[Period=="AfterIHA"],ASPE_Hospital[Period=="DuringIHA"]))
 t.test(ASPE_Hospital~ Period, data = periodAD)
-with(periodAD, t.test(ASPE_Hospital[Period=="AfterIHA"],ASPE_Hospital[Period=="DuringIHA"]))
-t.test(ASPE_Hospital~ Period, data = periodAD)
+
 
 head(periodBD)
 with(periodBD, t.test(ASPE_Hospital[Period=="BeforeIHA"],ASPE_Hospital[Period=="DuringIHA"]))
 t.test(ASPE_Hospital~ Period, data = periodBD)
-with(periodBD, t.test(ASPE_Hospital[Period=="BeforeIHA"],ASPE_Hospital[Period=="DuringIHA"]))
-t.test(ASPE_Hospital~ Period, data = periodBD)
+
+
+-----------------------------------------------------------------------------------------------------
+
+2) Finding the amount spent in each state and grouping it under highest and lowest claim states? 
+
+
 
 -----------------------------------------------------------------------------------------------------
 
