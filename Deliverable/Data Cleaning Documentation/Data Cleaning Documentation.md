@@ -27,8 +27,14 @@ The data contain 13 Columns and 69631 rows, [see details in screen-shot](https:/
 
 ## Access & Use Information
 
-This information is provided 'as is', and this site makes no warranties on the information provided. Any damages resulting from its use are disclaimed. We encourage the use of our open data commons licenses but we cannot give any warranty that they will work in the way expected or should be used for any specific purpose. For more information on license, please visit the link below.
-License: [See here for more information](http://opendefinition.org/licenses/odc-odbl/)
+This information is provided 'as is', and this site makes no warranties on the information provided. Any damages resulting from its use are disclaimed. We encourage the use of our open data commons licenses but we cannot give any warranty that they will work in the way expected or should be used for any specific purpose. For more information on license, please visit the link below.  
+License:  
+This is a human-readable summary of the ODbL 1.0 license. Please see the disclaimer below.  
+You are free:  
+To Share: To copy, distribute and use the database.  
+To Create: To produce works from the database.  
+To Adapt: To modify, transform and build upon the database.  
+[See here for more information](http://opendefinition.org/licenses/odc-odbl/)
 
 ## Data clean up procedure by Microsoft Excel 2016.
 -  ##### The start date and end Date were removed because they are the same across all the rows (start date =1012015; end date = 12312015)
