@@ -95,13 +95,13 @@ To Adapt: To modify, transform and build upon the database.
      - Click "OK" to change the percent into a decimal.
  
 
-# Metadata:  
+## Metadata:  
 Also known as Medicare Spending per Beneficiary (MSPB) Spending Breakdowns by Claim Type file. The data displayed here show average spending levels during Medicare Spending per Beneficiary (MSPB) episodes. An MSPB episode includes all Medicare Part A and Part B claims paid during the period from 3 days prior to a hospital admission through 30 days after discharge. These average Medicare payment amounts have been price-standardized to remove the effect of geographic payment differences and add-on payments for indirect medical education (IME) and disproportionate share hospitals (DSH).  
 Here is the [link](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Metadata.md) for metdata file.  
 
 
 # Data were verified Excel:
 
-After cleaning up the data, there were 11 columns and 55316 rows, where we have deleted 14315 rows with "0" values for ASPE_Hospital please find the link below to see the difference between before and after cleaning the dataset.    
+After cleaning up the data, there were 11 columns and 55316 rows, where we have deleted 14315 rows with "**0**" values for ASPE_Hospital please find the link below to see the difference between before and after cleaning the dataset.    
 [Before Cleaning the Dataset](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/Before%20Cleaning.png)  
 [After Cleaning the Dataset](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/Figure%202%20Data%20set%20of%20Medical%20Hospital%20speinding%20by%20claim%20after%20data%20clean.pdf)  
