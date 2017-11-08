@@ -374,15 +374,6 @@ knitr::opts_chunk$set(echo = TRUE)
 summary(Region)
 ```
 
-library(ggplot2)
-theme_set(theme_bw())
-
-# Draw plot
-ggplot(hospExp, aes(x=State, y=ASPE_State)) + 
-  geom_bar(stat="identity", width=.5, fill="tomato3") + 
-  labs(title="Ordered Statewise Spending", 
-       subtitle="State Vs ASPE_State", ) + 
-  theme(axis.text.x = element_text(angle=65, vjust=0.6))
 
 
 2) Finding the amount spent in each state and grouping it under highest and lowest claim states? 
@@ -454,7 +445,7 @@ StateSpending_west <- subset(StateSpending, State %in% c("AZ", "CO", "ID", "NM",
 
 (StateSpending_south <- StateSpending_south[, c("Hospital_Name", "State", "ASPE_State")])
 
-(StateSpending_south <- StateSpending_south[, c("Hospital_Name", "State", "ASPE_State")])
+(StateSpending_west <- StateSpending_west[, c("Hospital_Name", "State", "ASPE_State")])
 
 ```
 
@@ -465,12 +456,26 @@ StateSpending_west <- subset(StateSpending, State %in% c("AZ", "CO", "ID", "NM",
 AggStateSpending<- aggregate(StateSpending$ASPE_State~StateSpending$State, data = StateSpending, sum)
 
 ```
+## Loading the Library
+```{r}
+library(ggplot2)
+
+```
 
 ## Changing the Column names
 
 ```{r}
 
 colnames(AggStateSpending) <- c("State", "ASPE_State")
+
+colnames(StateSpending_northeast) <- c("State", "ASPE_State")
+
+colnames(StateSpending_south) <- c("State", "ASPE_State")
+
+colnames(StateSpending_midwest) <- c("State", "ASPE_State")
+
+colnames(StateSpending_west) <- c("State", "ASPE_State")
+
 
 ```
 
@@ -523,35 +528,46 @@ ggplot(AggStateSpending, aes(x=State, y = ASPE_State, color = State))+
   + ggtitle("Graph for highest spending per State")
 ```
 
+# Ordered Bar graph
+```{r}
+ggplot(AggStateSpending, aes(x=State, y=ASPE_State)) + 
+  geom_bar(stat="identity", width=.5, fill="tomato3") + 
+  labs(title="Ordered Statewise Spending", 
+       subtitle="State Vs ASPE_State", ) + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+  
+```
+
 
 #Reploting the graph after changing the expontential to numbers
 
 ```{r}
-ggplot(hosp_northeast, aes(x=State, y = ASPE_Hospital, color = State))+
+ggplot(StateSpending_northeast, aes(x=State, y = ASPE_State, color = State))+
   + geom_histogram(stat = "identity")+
-  + xlab("Hospital Name")+
-  + ylab("Average Spending Per Episode Hospital")+
+  + xlab("State")+
+  + ylab("Average Spending Per Episode State")+
   + scale_y_continuous(labels=fancy_scientific)+
-  + ggtitle("Graph for highest spending per hospital in North East Region")
+  + ggtitle("Graph for highest spending per State in North East Region")
 
-ggplot(hosp_midwest, aes(x=State, y = ASPE_State, color = State))+
+ggplot(StateSpending_midwest, aes(x=State, y = ASPE_State, color = State))+
   geom_histogram(stat = "Identity")+
-  xlab("Hospital Name")+
-  ylab("Average Spending Per Episode Hospital")+
+  xlab("State")+
+  ylab("Average Spending Per Episode State")+
   scale_y_continuous(labels=fancy_scientific)
-ggtitle("Graph for highest spending per hospital in Midwest Region")
+ggtitle("Graph for highest spending per State in Midwest Region")
 
-ggplot(hosp_south, aes(x=State, y = ASPE_State, color = State))+
+ggplot(StateSpending_south, aes(x=State, y = ASPE_State, color = State))+
   geom_histogram(stat = "Identity")+
   xlab("State")+
   ylab("ASPE_State")+
   scale_y_continuous(labels=fancy_scientific)
 ggtitle("Graph for highest spending per State in South Region")
 
-ggplot(hosp_west, aes(x=State, y = ASPE_State, color = State))+
+ggplot(StateSpending_west, aes(x=State, y = ASPE_State, color = State))+
   geom_histogram(stat = "Identity")+
   xlab("State")+
   ylab("ASPE_State")+
   scale_y_continuous(labels=fancy_scientific)
 ggtitle("Graph for highest spending per State in West Region")
-```{r}
+
+```
