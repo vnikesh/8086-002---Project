@@ -11,7 +11,7 @@ output:
 
 ## R Script - 8086-002 - Data to Decisions
 
-## The research questions to answered as follows:
+## The research questions are as follows:
 1. Finding out on which claim type did all the hospital across USA has spent more and also for which period?  
 2. Finding the amount spent in each state and grouping it under highest and lowest claim states?  
 3. Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?  
@@ -29,7 +29,7 @@ output:
 
 ###Setting the path to the folder of the date set, loading the data and checking the data
 ```{r set path and load the data}
-setwd("C:\\Users\\leirhyh\\Documents\\Leipersonallife\\UNOclass\\ISQA8086-002\\groupproject\\dataset")
+setwd("D:/Graduate/3rd Sem(Fall)/8086-002 From Data To Decision/Team Project/R-Script/te/x")
 HospitalSpending <- read.csv ("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE)  
 View(HospitalSpending) # view the data
 ```
@@ -176,9 +176,9 @@ From Figure 2, we found that the average hospital spending on during Index Hospi
  
 ##1.3 Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?    
 
-##1.3.1 Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?  
 
 ```{r include=FALSE, warning=FALSE}
+setwd("D:/Graduate/3rd Sem(Fall)/8086-002 From Data To Decision/Team Project/R-Script/te/x")
 hosp <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv")
 
 #Removing "NA" values
@@ -294,7 +294,7 @@ Region <- rbind(NE_Firstrow,MW_Firstrow,S_Firstrow,W_Firstrow)
 head(Region)
 #Select only the required columns
 #Region <- Region[,c(1,3,6,13)]
-Region <- Region[,c("Hospital_Name","State","ASPE_Hospital","ASPE_Nation")]
+Region <- Region[,c("Hospital_Name","State","ASPE_Hospital","Region")]
 #Combining the Column State and Region to a new Column.
 Region$Zone <- paste(Region$State, "\n", Region$Region)
 
