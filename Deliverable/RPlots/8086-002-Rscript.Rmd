@@ -7,7 +7,7 @@ output:
   pdf_document: default
 ---
 
-##Instructed by Andrea Wiggins
+## Instructed by Andrea Wiggins
 
 ## R Script - 8086-002 - Data to Decisions
 
