@@ -29,7 +29,7 @@ output:
 
 ###Setting the path to the folder of the date set, loading the data and checking the data
 ```{r set path and load the data}
-setwd("D:/Graduate/3rd Sem(Fall)/8086-002 From Data To Decision/Team Project/R-Script/te/x")
+setwd("D:/Graduate/3rd Sem(Fall)/8086-002 From Data To Decision/Team Project/R-Script")
 HospitalSpending <- read.csv ("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE)  
 View(HospitalSpending) # view the data
 ```
@@ -178,7 +178,7 @@ From Figure 2, we found that the average hospital spending on during Index Hospi
 
 
 ```{r include=FALSE, warning=FALSE}
-setwd("D:/Graduate/3rd Sem(Fall)/8086-002 From Data To Decision/Team Project/R-Script/te/x")
+setwd("D:/Graduate/3rd Sem(Fall)/8086-002 From Data To Decision/Team Project/R-Script")
 hosp <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv")
 
 #Removing "NA" values
@@ -356,7 +356,7 @@ s <- s + geom_polygon( data=all_states, aes(x=long, y=lat, group = group),colour
 s1 <- s +  geom_jitter( data=r1, position=position_jitter(width=0.5, height=0.5), aes(x=lon, y=lat, size = ASPE_Hospital, color=Hospital_Name))+
   scale_color_discrete(name="Hospital")+
   geom_text( data=r1, hjust=0.5, vjust=-2, aes(x=lon, y=lat, label=Hospital_Name), colour="magenta2", size=2 )+
-  scale_size_continuous(range = c(5,10),guide = FALSE)+
+  scale_size_continuous(range = c(5,9),guide = FALSE)+
   theme(panel.background = element_rect(fill = 'white', colour = 'red'))+
   theme(legend.position="bottom")+
   theme(legend.text=element_text(size=5))
