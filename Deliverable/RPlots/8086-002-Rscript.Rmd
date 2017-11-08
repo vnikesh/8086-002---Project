@@ -374,3 +374,184 @@ knitr::opts_chunk$set(echo = TRUE)
 summary(Region)
 ```
 
+library(ggplot2)
+theme_set(theme_bw())
+
+# Draw plot
+ggplot(hospExp, aes(x=State, y=ASPE_State)) + 
+  geom_bar(stat="identity", width=.5, fill="tomato3") + 
+  labs(title="Ordered Statewise Spending", 
+       subtitle="State Vs ASPE_State", ) + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+
+
+2) Finding the amount spent in each state and grouping it under highest and lowest claim states? 
+
+# Finding the amount spent in each state and grouping it under highest and lowest claim states 
+
+## Setting the path to the folder of the date set and loading the data 
+
+```{r}
+
+setwd("C:/Users/hp/Desktop")
+StateSpending <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE)  
+head(StateSpending) # check the first six rows of the data
+View(StateSpending) # view the data
+nrow(StateSpending) # check how many rows
+ncol(StateSpending) # check how many columns
+
+```
+
+## Removing "NA" values
+
+```{r}
+StateSpending[is.na(StateSpending)] <- 0
+```
+
+## Creating the subset by filtering the values based on the column "Period"
+
+```{r}
+StateSpending <- subset(StateSpending, Period == "ComEpisode")
+```
+
+## Grouping the state into Region
+## North East Region
+```{r}
+StateSpending_northeast <- subset(StateSpending, State %in% c("CT", "ME", "MA", "NH", "RI", "VT", "NJ", "PA", "NY"))
+```
+
+
+## Midwest Region
+```{r}
+StateSpending_midwest <- subset(StateSpending, State %in% c("IN", "IL", "MI", "OH", "WI", "IA", "KS", "MN", "MO", "NE", "ND", "SD"))
+```
+
+## South Region
+
+```{r}
+StateSpending_south <- subset(StateSpending, State %in% c("DE", "DC", "FL", "GA", "MD", "NC", "SC", "VA", "WV", "AL", "KY", "MS", "TN", "AR", "LA", "OK", "TX"))
+```
+
+
+## West Region
+```{r}
+StateSpending_west <- subset(StateSpending, State %in% c("AZ", "CO", "ID", "NM", "MT", "UT", "NV", "WY", "AK", "CA", "HI", "OR", "WA"))
+```
+
+## Creating a subset with only Hospital_Name, State, ASPE_State
+```{r}
+
+(StateSpending <- StateSpending[, c("Hospital_Name", "State", "ASPE_State")])
+
+```
+
+## Creating a subset with only Hospital_Name, State, ASPE_State Regionwise
+```{r}
+
+(StateSpending_northeast <- StateSpending_northeast[, c("Hospital_Name", "State", "ASPE_State")])
+
+(StateSpending_midwest <- StateSpending_midwest[, c("Hospital_Name", "State", "ASPE_State")])
+
+(StateSpending_south <- StateSpending_south[, c("Hospital_Name", "State", "ASPE_State")])
+
+(StateSpending_south <- StateSpending_south[, c("Hospital_Name", "State", "ASPE_State")])
+
+```
+
+## Aggregating the total expenditure statewise
+
+```{r}
+
+AggStateSpending<- aggregate(StateSpending$ASPE_State~StateSpending$State, data = StateSpending, sum)
+
+```
+
+## Changing the Column names
+
+```{r}
+
+colnames(AggStateSpending) <- c("State", "ASPE_State")
+
+```
+
+## Subsetting the Max and Min of the Aggregate State Spendings
+
+```{r}
+MaxAggStateSpending <- 
+AggStateSpending[max(State ~ ASPE_State),]
+
+
+MinAggStateSpending <- 
+AggStateSpending[min(State ~ ASPE_State),]
+
+```
+
+## Statewise Plotting of the Spending
+
+```{r}
+
+ggplot(AggStateSpending, aes(x=State, y = ASPE_State, color = State))+
+  + geom_histogram(stat = "identity")+
+  + xlab("State")+
+  + ylab("Average Spending Per Episode State")+
+  + ggtitle("Graph for spending per state")
+  
+  ```
+
+## Function for converting exponential to numeric
+
+```{r}
+fancy_scientific <- function(l) {
+  +     # turn in to character string in scientific notation
+    +     l <- format(l, scientific = TRUE)
+    +     # quote the part before the exponent to keep all the digits
+      +     l <- gsub("^(.*)e", "'\\1'e", l)
+      +     # turn the 'e+' into plotmath format
+        +     l <- gsub("e", "%*%10^", l)
+        +     # return this as an expression
+          +     parse(text=l)
+        + }
+```
+
+## Reploting the graph after changing the expontential values to numbers
+```{r}
+ggplot(AggStateSpending, aes(x=State, y = ASPE_State, color = State))+
+  + geom_histogram(stat = "identity")+
+  + xlab("State")+
+  + ylab("Average Spending Per Episode State")+
+  + scale_y_continuous(labels=fancy_scientific)+
+  + ggtitle("Graph for highest spending per State")
+```
+
+
+#Reploting the graph after changing the expontential to numbers
+
+```{r}
+ggplot(hosp_northeast, aes(x=State, y = ASPE_Hospital, color = State))+
+  + geom_histogram(stat = "identity")+
+  + xlab("Hospital Name")+
+  + ylab("Average Spending Per Episode Hospital")+
+  + scale_y_continuous(labels=fancy_scientific)+
+  + ggtitle("Graph for highest spending per hospital in North East Region")
+
+ggplot(hosp_midwest, aes(x=State, y = ASPE_State, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("Hospital Name")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=fancy_scientific)
+ggtitle("Graph for highest spending per hospital in Midwest Region")
+
+ggplot(hosp_south, aes(x=State, y = ASPE_State, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State")+
+  ylab("ASPE_State")+
+  scale_y_continuous(labels=fancy_scientific)
+ggtitle("Graph for highest spending per State in South Region")
+
+ggplot(hosp_west, aes(x=State, y = ASPE_State, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State")+
+  ylab("ASPE_State")+
+  scale_y_continuous(labels=fancy_scientific)
+ggtitle("Graph for highest spending per State in West Region")
+```{r}
