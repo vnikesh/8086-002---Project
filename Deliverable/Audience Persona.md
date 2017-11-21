@@ -5,7 +5,7 @@
 #### Persona name: Seema Verma, Administrator for CMS (Centre for Medicare and Medicaid services)
 
 Photo:
-
+![](https://upload.wikimedia.org/wikipedia/commons/4/45/Seema_Verma.jpg)
 
  
 
