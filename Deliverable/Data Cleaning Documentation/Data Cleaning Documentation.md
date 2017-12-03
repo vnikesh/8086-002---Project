@@ -45,7 +45,7 @@ To Adapt: To modify, transform and build upon the database.
    - **Procedure**
         - Select the entire required column and hold **CTRL+H**
         - Using Find & Replace, find all the '$' values and replace them with empty space
-- ##### The Period data was re-annotated with numbers from 1 - 4
+- ##### The Period data was re-annotated as below.
    -  **BeforeIHA** - 1 to 3 days Prior to Index Hospital Admission 
    -  **DuringIHA** - During Index Hospital Admission 
    -  **AfterIHA** - 1 through 30 days After Discharge from Index Hospital Admission
