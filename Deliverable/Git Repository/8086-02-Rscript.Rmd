@@ -1,0 +1,986 @@
+---
+title: "Medicare Spending Per Beneficiary by Data Creative"
+author: "Nikesh, Pooja, Runhua  "
+date: "December 8, 2017"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##**Instructed by Andrea Wiggins**
+
+##**Team Name: _Data Creatives_**
+**Team Project: Medicare Spending Per Beneficiary**
+**Team Members:**  
+  - **Nikesh**  
+  - **Pooja**  
+  - **Runhua**  
+
+##**Contents**
+1. Data cleaning  
+2. Descriptive analysis    
+3. Visualization with ggplot    
+
+
+##**1. Data cleaning**
+###**1.1 Data description** 
+
+The data displayed here show average spending levels during hospitals. An MSPB episode includes all Medicare Part A and Part B claims paid during the period from 3 days prior to a hospital admission through 30 days after discharge. These average Medicare payment amounts have been price-standardized to remove the effect of geographic payment differences and add-on payments for indirect medical education (IME) and disproportionate share hospitals (DSH). Centers for Medicare & Medicaid Services uses the information on this web page to calculate a hospital, which is reported on Hospital Compare. The data can be downloaded [here](https://catalog.data.gov/dataset/medicare-hospital-spending-by-claim-61b57).  
+
+The data contain 13 Columns and 69631 rows, [see details in screen-shot](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/Data%20set%20of%20Medical%20Hospital%20speinding%20by%20claim%20before%20data%20clean.pdf).  
+
+**1.1.1The headers are as follows:**  
+
+| Hospital Name | Provider ID |	State |	Period | Claim Type | Avg Spending Per Episode Hospital | Avg Spending Per Episode State |	Avg Spending Per Episode Nation |Percent of Spending Hospital|Percent of Spending State|Percent of Spending Nation| Start Date| End Date|
+|:------:|:------:|:---:|:----:|:-----:|:--------:|:--------:|:--------:|:---------:|:---------:|:--------:|:------:|:-------:|  
+
+**1.1.2 Key Terms**
+
+* Medicare
+* Hospital spending
+* Episode
+* Claim
+
+**1.1.3 References**    
+
+"Medicare Hospital Spending by Claim." [Medicare Hospital Spending by Claim Data, Publisher Centers for Medicare & Medicaid Services, 14 July 2017]( https://catalog.data.gov/dataset/medicare-hospital-spending-by-claim-61b57)
+
+###**1.2 Access & Use Information**
+
+This information is provided 'as is', and this site makes no warranties on the information provided. Any damages resulting from its use are disclaimed. We encourage the use of our open data commons licenses but we cannot give any warranty that they will work in the way expected or should be used for any specific purpose. For more information on license, please visit the link below.  
+License:  
+This is a human-readable summary of the ODbL 1.0 license. Please see the disclaimer below.  
+You are free.  
+To Share: To copy, distribute and use the database.  
+To Create: To produce works from the database.  
+To Adapt: To modify, transform and build upon the database.  
+[See here for more information](http://opendefinition.org/licenses/odc-odbl/)
+
+###**1.3 Data clean up procedure by Microsoft Excel 2016.** 
+
+**1.3.1** The start date and end Date were removed because they are the same across all the rows (start date =1012015; end date = 12312015)
+
+   - **Procedure**
+   
+     - Select the entire column under *start date* and *end date* by clicking the column heading and hit backspace and delete the entire data in those columns.  
+        
+**1.3.2** To make analysis easier, the cost or spending were formatted as number, where all the cost or spending was accompanied with $ as units
+
+   - **Procedure**
+   
+     - Select the entire required column and hold **CTRL+H**  
+     - Using Find & Replace, find all the '$' values and replace them with empty space    
+        
+**1.3.3** The Period data was re-annotated as follows:   
+
+   -  **BeforeIHA** - 1 to 3 days Prior to Index Hospital Admission   
+   -  **DuringIHA** - During Index Hospital Admission  
+   -  **AfterIHA** - 1 through 30 days After Discharge from Index Hospital Admission  
+   - **ComEpisode** - Complete Episode 
+   
+**1.3.4** The claim types were re-annotated as follows:
+
+   - Durable Medical Equipment	- **DME**  
+   - Carrier - **Carrier**  
+   - Home Health Agency - **HHA**  
+   - Hospice - **Hospice**  
+   - Inpatient - **Inpatient**  
+   - Outpatient - **Outpatient**  
+   - Skilled Nursing Facility - **SNF**  
+   - Total - **Total**
+   
+**1.3.5** Some of the hospital names were abbreviated for better viewing as follows:
+
+   - Medical Center - **MC**  
+   - County Hospital - **CH**  
+   - Memorial Hospital - **MH**  
+   - Regional Hospital - **RH**  
+   - Community Hospital - **CMH**
+   
+       - **Procedure** 
+       
+        -  In a new column write down the periods/claim   types/hospital names and the respective abbreviations.  
+        -  Using **VLOOKUP(lookup_value, table_array, col_index_num,[range_lookup])**, replace the  periods/claim types/hospital names with their respective abbrevations.
+        
+**1.3.6** Abbreviated the column names for easier viewing as follows:
+
+   - Avg_Spending_Per_Episode_Hospital    - **ASPE_Hospital**  
+   - Avg_Spending_Per_Episode_State      - **ASPE_State**  
+   - Avg_Spending_Per_Episode_Nation     - **ASPE_Nation**  
+   - Percent_of_Spending_Hospital        - **POS_Hospital**  
+   - Percent_of_Spending_State           - **POS_State**  
+   - Percent_of_Spending_Nation         - **POS_Nation**
+   
+     - **Procedure**
+     
+        - Select the required column names and replace them with their abbreviations.
+        
+**1.3.7** Removed the rows where the average spending is **0**, as it doesn't help us in the analysis.
+
+**1.3.8** Change the values with **percentage** to **decimal** values to help in analysis.
+
+   - **Procedure**
+   
+     - Select the entire required column and hold **CTRL+H**  
+     - Click Find All, to see a list of cells with **0**  
+     - Select an item in the list, and press Ctrl+A, to select the entire list, and to select all the **0** value cells on the worksheet  
+     - To delete the entire row for each **0** value cell that was found:  
+        - On the Ribbon's Home tab, click Delete, and then click Delete Sheet Rows. 
+        
+   - **Procedure** 
+   
+     - Right-click the cell you wish to change, and select "Format Cells."  
+     - Click the "Number" tab in the Format Cells window.  
+     - Click "Number" in the category list.  
+     - Enter the number of decimal places you prefer next to the field labeled Decimal Places. This can be done by manually entering the number or by clicking the up/down arrows to change the default value of 2.  
+     - Click "OK" to change the percent into a decimal.  
+
+### **1.4 Metadata:**
+
+Also known as Medicare Spending per Beneficiary (MSPB) Spending Breakdowns by Claim Type file. The data displayed here show average spending levels during Medicare Spending per Beneficiary (MSPB) episodes. An MSPB episode includes all Medicare Part A and Part B claims paid during the period from 3 days prior to a hospital admission through 30 days after discharge. These average Medicare payment amounts have been price-standardized to remove the effect of geographic payment differences and add-on payments for indirect medical education (IME) and disproportionate share hospitals (DSH).  
+Here is the [link](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Metadata.md) for metdata file.  
+
+
+### **1.5 Data were verified Excel:**
+
+After cleaning up the data, there were 11 columns and 55316 rows, where we have deleted 14315 rows with "**0**" values for ASPE_Hospital please find the link below to see the difference between before and after cleaning the dataset.    
+[Before Cleaning the Dataset](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/Before%20Cleaning.png)  
+[After Cleaning the Dataset](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Support%20Files/Figure%202%20Data%20set%20of%20Medical%20Hospital%20speinding%20by%20claim%20after%20data%20clean.pdf)  
+
+##**2. Descriptive analysis **
+
+###**We have addressed all our research questions.**
+
+1) Finding out on which claim type did all the hospital across USA has spent more and also for which period? 
+* The average hospital spending on **inpatient** is the **most** in claim type. 
+* **During Index Hospital Admission** is the **most** in period type.  
+
+2) Finding the amount spent in each state and grouping it under highest and lowest claim states?
+* For the amount spent, **Texas** is the **highest** while **Vermont** is the **lowest**.  
+
+3) Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?
+* **Foundation Surgical hospital** from Texas has spent more money on its patients in South region
+* **Hackensack University medical center, Kings daughters medical center and Los Angeles hospitals** have spent good amount on patients in their regions.
+
+
+
+
+
+###**2.1 Finding out on which claim type did all the hospital across USA has spent more and also for which period?**
+
+```{r warning=FALSE}
+#1.1 Finding out on which claim type did all the hospital across USA has spent more 
+
+#setting the path to the folder of the date set, loading the data and checking the data
+#setwd("C:\\Users\\leirhyh\\Documents\\Leipersonallife\\UNOclass\\ISQA8086-002\\groupproject\\projectRscript")
+
+HospitalSpending <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE)  
+HospitalSpending[!complete.cases(HospitalSpending),] #check wheather there is missing data
+#Since there is no missing data for current dataset, we won't consider missing data in our following analyses.
+
+#loading the libray
+
+library(doBy)
+library(DT)
+library(xtable)
+library(ggplot2)
+library(reshape2)
+library(GGally)
+library(scales)
+
+
+# subset the data
+# select three columns of Claim_type, ASPE_Hospital, POS_Hospital for the folowing analyses
+claimtype <- HospitalSpending[, c("Claim_type" , "ASPE_Hospital", "POS_Hospital")]
+
+#Select only two column of "Claim_type" , "ASPE_Hospital" and omitting the Total type 
+#because we compare the relationships between each claim type
+claimtype1 <- HospitalSpending[HospitalSpending$Claim_type != "Total", c("Claim_type" , "ASPE_Hospital")]
+# split the data into different columns based on Claim_type
+claimtype2 <- dcast(claimtype1, ASPE_Hospital ~ Claim_type) 
+
+# subset the proper pair for  the following t test
+claimCarrierDME <- HospitalSpending[HospitalSpending$Claim_type == "Carrier" | HospitalSpending$Claim_type == "DME", c("Claim_type" , "ASPE_Hospital")]
+claimCarrierHHA <- HospitalSpending[HospitalSpending$Claim_type == "Carrier" | HospitalSpending$Claim_type == "HHA", c("Claim_type" , "ASPE_Hospital")]
+claimCarrierHospice <- HospitalSpending[HospitalSpending$Claim_type == "Carrier" | HospitalSpending$Claim_type == "Hospice", c("Claim_type" , "ASPE_Hospital")]
+claimCarrierInpatient <- HospitalSpending[HospitalSpending$Claim_type == "Carrier" | HospitalSpending$Claim_type == "Inpatient", c("Claim_type" , "ASPE_Hospital")]
+claimCarrierOutpatient <- HospitalSpending[HospitalSpending$Claim_type == "Carrier" | HospitalSpending$Claim_type == "Outpatient", c("Claim_type" , "ASPE_Hospital")]
+claimCarrierSNF <- HospitalSpending[HospitalSpending$Claim_type == "Carrier" | HospitalSpending$Claim_type == "SNF", c("Claim_type" , "ASPE_Hospital")]
+claimDMEHHA <- HospitalSpending[HospitalSpending$Claim_type == "DME" | HospitalSpending$Claim_type == "HHA", c("Claim_type" , "ASPE_Hospital")]
+claimDMEHospice <- HospitalSpending[HospitalSpending$Claim_type == "DME" | HospitalSpending$Claim_type == "Hospice", c("Claim_type" , "ASPE_Hospital")]
+claimDMEInpatient <- HospitalSpending[HospitalSpending$Claim_type == "DME" | HospitalSpending$Claim_type == "Inpatient", c("Claim_type" , "ASPE_Hospital")]
+claimDMEOutpatient <- HospitalSpending[HospitalSpending$Claim_type == "DME" | HospitalSpending$Claim_type == "Outpatient", c("Claim_type" , "ASPE_Hospital")]
+claimDMESNF <- HospitalSpending[HospitalSpending$Claim_type == "DME" | HospitalSpending$Claim_type == "SNF", c("Claim_type" , "ASPE_Hospital")]
+claimHHAHospice <- HospitalSpending[HospitalSpending$Claim_type == "HHA" | HospitalSpending$Claim_type == "Hospice", c("Claim_type" , "ASPE_Hospital")]
+claimHHAInpatient <- HospitalSpending[HospitalSpending$Claim_type == "HHA" | HospitalSpending$Claim_type == "Inpatient", c("Claim_type" , "ASPE_Hospital")]
+claimHHAOutpatient <- HospitalSpending[HospitalSpending$Claim_type == "HHA" | HospitalSpending$Claim_type == "Outpatient", c("Claim_type" , "ASPE_Hospital")]
+claimHHASNF <- HospitalSpending[HospitalSpending$Claim_type == "HHA" | HospitalSpending$Claim_type == "SNF", c("Claim_type" , "ASPE_Hospital")]
+claimHospiceInpatient <- HospitalSpending[HospitalSpending$Claim_type == "Hospice" | HospitalSpending$Claim_type == "Inpatient", c("Claim_type" , "ASPE_Hospital")]
+claimHospiceOutpatient <- HospitalSpending[HospitalSpending$Claim_type == "Hospice" | HospitalSpending$Claim_type == "Outpatient", c("Claim_type" , "ASPE_Hospital")]
+claimHospiceSNF <- HospitalSpending[HospitalSpending$Claim_type == "Hospice" | HospitalSpending$Claim_type == "SNF", c("Claim_type" , "ASPE_Hospital")]
+claimInpatientOutpatient <- HospitalSpending[HospitalSpending$Claim_type == "Inpatient" | HospitalSpending$Claim_type == "Outpatient", c("Claim_type" , "ASPE_Hospital")]
+claimInpatientSNF <- HospitalSpending[HospitalSpending$Claim_type == "Inpatient" | HospitalSpending$Claim_type == "SNF", c("Claim_type" , "ASPE_Hospital")]
+claimOutpatientSNF <- HospitalSpending[HospitalSpending$Claim_type == "Outpatient" | HospitalSpending$Claim_type == "SNF", c("Claim_type" , "ASPE_Hospital")]
+
+
+claimHHAHospice <- HospitalSpending[HospitalSpending$Claim_type == "HHA" | HospitalSpending$Claim_type == "Hospice", c("Claim_type" , "ASPE_Hospital")]
+claimHHAHospice <- HospitalSpending[HospitalSpending$Claim_type == "HHA" | HospitalSpending$Claim_type == "Hospice", c("Claim_type" , "ASPE_Hospital")]
+
+#change claim_type to full name for analyses
+claimtype$Claim_type <- factor(claimtype$Claim_type, levels=c("Carrier","DME", "HHA", "Hospice", "Inpatient", "Outpatient", "SNF","Total"), labels=c("Carrier", "Durable Medical Equipment","Home Health Agency","Hospice","Inpatient","Outpatient", "Skilled Nursing Facility", "Total"))
+
+# produce the sumary table for the subsets
+# sumary table for the hospital spencid nationally by claim types ($).
+claimTable <- do.call(cbind.data.frame, aggregate(ASPE_Hospital ~ Claim_type, data=claimtype, FUN = function(x) {
+  c("Number"=format(round(length(x), 0), nsmall = 0), M=format(round(mean(x), 2), nsmall = 2), min=min(x),max=max(x), 
+    SD=format(round(sd(x), 2), nsmall = 2),format(round(quantile(x,c(0.05, 0.25, 0.50, 0.75, 0.95)), 2), nsmall = 2), iqr=IQR(x)) })); names(claimTable) <- c("Claim Type", "Number", "Mean", "Minimum", "Maximum", "Stanard deviation", "5% Quantile","25% Quantile","Median","75% Quantile", "95% Quantile", "IQR")
+View(claimTable)  
+
+
+# sumary table for the hospital spending perentage nationally by claim types (%).
+claimTableP <- do.call(cbind.data.frame, aggregate(POS_Hospital ~ Claim_type, data=claimtype, FUN = function(x) {
+  c("Number"=format(round(length(x), 0), nsmall = 0), M=format(round(mean(x), 5), nsmall = 5), min=min(x),max=max(x), 
+    SD=format(round(sd(x), 2), nsmall = 2),quantile(x,c(0.05, 0.25, 0.50, 0.75, 0.95)), iqr=IQR(x)) })); names(claimTableP) <- c("Claim Type", "Number", "Mean", "Minimum", "Maximum", "Stanard deviation", "5% Quantile","25% Quantile","Median","75% Quantile", "95% Quantile", "IQR")
+View(claimTableP)  
+
+#Histogram of the spending based on different claim types
+ggplot(data = claimtype, aes(x=ASPE_Hospital)) + geom_histogram(aes(fill=Claim_type)) + facet_wrap(~Claim_type, scales="free") +
+   theme(text = element_text(size=8))
+ggplot(data = claimtype, aes(x=POS_Hospital)) + geom_histogram(aes(fill=Claim_type)) + facet_wrap(~Claim_type, scales="free")
+
+#boxplot of the spending based on different claim types
+ggplot(data = claimtype, aes(y=ASPE_Hospital, x=Claim_type)) + geom_boxplot(aes(fill=Claim_type)) + facet_wrap(~Claim_type, scales="free")
+ggplot(data = claimtype, aes(y=POS_Hospital, x=Claim_type)) + geom_boxplot(aes(fill=Claim_type)) + facet_wrap(~Claim_type, scales="free")
+
+# ANOVA analysis of the spending based on different claim types
+fit = lm(formula = claimtype$ASPE_Hospital ~ claimtype$Claim_type)
+anova (fit)
+
+
+# t test to check which pair are significantly from each other
+with(claimCarrierDME, t.test(ASPE_Hospital[Claim_type=="Carrier"],ASPE_Hospital[Claim_type=="DME"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimCarrierDME)
+with(claimCarrierHHA, t.test(ASPE_Hospital[Claim_type=="Carrier"],ASPE_Hospital[Claim_type=="HHA"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimCarrierHHA)
+with(claimCarrierHospice , t.test(ASPE_Hospital[Claim_type=="Carrier"],ASPE_Hospital[Claim_type=="Hospice"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimCarrierHospice )
+with(claimCarrierInpatient, t.test(ASPE_Hospital[Claim_type=="Carrier"],ASPE_Hospital[Claim_type=="Inpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimCarrierInpatient)
+with(claimCarrierOutpatient, t.test(ASPE_Hospital[Claim_type=="Carrier"],ASPE_Hospital[Claim_type=="Outpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimCarrierOutpatient)
+with(claimCarrierSNF, t.test(ASPE_Hospital[Claim_type=="Carrier"],ASPE_Hospital[Claim_type=="SNF"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimCarrierSNF)
+with(claimDMEHHA, t.test(ASPE_Hospital[Claim_type=="DME"],ASPE_Hospital[Claim_type=="HHA"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimDMEHHA)
+with(claimDMEHospice, t.test(ASPE_Hospital[Claim_type=="DME"],ASPE_Hospital[Claim_type=="Hospice"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimDMEHospice)
+with(claimDMEInpatient, t.test(ASPE_Hospital[Claim_type=="DME"],ASPE_Hospital[Claim_type=="Inpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimDMEInpatient)
+with(claimDMEOutpatient, t.test(ASPE_Hospital[Claim_type=="DME"],ASPE_Hospital[Claim_type=="Outpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimDMEOutpatient)
+with(claimDMESNF, t.test(ASPE_Hospital[Claim_type=="DME"],ASPE_Hospital[Claim_type=="SNF"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimDMESNF)
+with(claimHHAHospice, t.test(ASPE_Hospital[Claim_type=="HHA"],ASPE_Hospital[Claim_type=="Hospice"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimHHAHospice)
+with(claimHHAInpatient, t.test(ASPE_Hospital[Claim_type=="HHA"],ASPE_Hospital[Claim_type=="Inpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimHHAInpatient)
+with(claimHHASNF, t.test(ASPE_Hospital[Claim_type=="HHA"],ASPE_Hospital[Claim_type=="SNF"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimHHASNF)
+with(claimHospiceInpatient, t.test(ASPE_Hospital[Claim_type=="Hospice"],ASPE_Hospital[Claim_type=="Inpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimHospiceInpatient)
+with(claimHospiceOutpatient, t.test(ASPE_Hospital[Claim_type=="Hospice"],ASPE_Hospital[Claim_type=="Outpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimHospiceOutpatient)
+with(claimHospiceSNF, t.test(ASPE_Hospital[Claim_type=="Hospice"],ASPE_Hospital[Claim_type=="SNF"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimHospiceSNF)
+with(claimInpatientOutpatient, t.test(ASPE_Hospital[Claim_type=="Inpatient"],ASPE_Hospital[Claim_type=="Outpatient"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimInpatientOutpatient)
+with(claimInpatientSNF, t.test(ASPE_Hospital[Claim_type=="Inpatient"],ASPE_Hospital[Claim_type=="SNF"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimInpatientSNF)
+with(claimOutpatientSNF, t.test(ASPE_Hospital[Claim_type=="Outpatient"],ASPE_Hospital[Claim_type=="SNF"]))
+t.test(ASPE_Hospital~ Claim_type, data = claimOutpatientSNF)
+
+#Finding out on which period did all the hospital across USA has spent more 
+
+# subset the data
+# select three columns of Period, ASPE_Hospital, POS_Hospital for the folowing analyses
+periodIHA <- HospitalSpending[, c("Period" , "ASPE_Hospital", "POS_Hospital")]
+
+# Select only two column of Peirod , ASPE_Hospital and omitting the Total type 
+#because we compare the relationships between each claim type
+periodIHA1 <- HospitalSpending[HospitalSpending$Period !="ComEpisode", c("Period" , "ASPE_Hospital")]
+
+# subset the proper pair for  the following t test
+periodAB <- HospitalSpending[HospitalSpending$Period == "AfterIHA" | HospitalSpending$Period == "BeforeIHA", c("Period" , "ASPE_Hospital")]
+periodAD <- HospitalSpending[HospitalSpending$Period == "AfterIHA" | HospitalSpending$Period == "DuringIHA", c("Period" , "ASPE_Hospital")]
+periodBD <- HospitalSpending[HospitalSpending$Period == "BeforeIHA" | HospitalSpending$Period == "DuringIHA", c("Period" , "ASPE_Hospital")]
+
+# split the data into different columns based on Claim_type
+periodIHA2 <- dcast(periodIHA1, ASPE_Hospital ~ Period) 
+periodIHA2$AfterIHA <- as.numeric(periodIHA2$AfterIHA)
+periodIHA2$BeforeIHA <- as.numeric(periodIHA2$BeforeIHA)
+periodIHA2$DuringIHA <- as.numeric(periodIHA2$DuringIHA)
+
+
+# produce the sumary table for the subsets
+# sumary table for the hospital spending nationally by periods ($).
+periodTable <- do.call(cbind.data.frame, aggregate(ASPE_Hospital ~ Period, data=periodIHA, FUN = function(x) {
+  c("Number"=format(round(length(x), 0), nsmall = 0), M=format(round(mean(x), 2), nsmall = 2), min=min(x),max=max(x), 
+    SD=format(round(sd(x), 2), nsmall = 2),format(round(quantile(x,c(0.05, 0.25, 0.50, 0.75, 0.95)), 2), nsmall = 2), iqr=IQR(x)) })); names(periodTable) <- c("Periods", "Number", "Mean", "Minimum", "Maximum", "Stanard deviation", "5% Quantile","25% Quantile","Median","75% Quantile", "95% Quantile", "IQR")
+View(periodTable)  
+
+# sumary table for the hospital spending perentage nationally by periods (%).
+periodTableP <- do.call(cbind.data.frame, aggregate(POS_Hospital ~ Period, data=periodIHA, FUN = function(x) {
+  c("Number"=format(round(length(x), 0), nsmall = 0), M=format(round(mean(x), 5), nsmall = 5), min=min(x),max=max(x), 
+    SD=format(round(sd(x), 2), nsmall = 2),quantile(x,c(0.05, 0.25, 0.50, 0.75, 0.95)), iqr=IQR(x)) })); names(periodTableP) <- c("Claim Type", "Number", "Mean", "Minimum", "Maximum", "Stanard deviation", "5% Quantile","25% Quantile","Median","75% Quantile", "95% Quantile", "IQR")
+View(periodTableP)  
+
+#Histogram of the spending based on different periods ($)
+
+ggplot(data = periodIHA, aes(x=ASPE_Hospital)) + geom_histogram(aes(fill=Period)) + facet_wrap(~Period, scales="free")
+ggplot(data = periodIHA, aes(x=POS_Hospital)) + geom_histogram(aes(fill=Period)) + facet_wrap(~Period, scales="free")
+
+#boxplot of the spending based on different periods
+ggplot(data = periodIHA, aes(y=ASPE_Hospital, x=Period)) + geom_boxplot(aes(fill=Period)) + facet_wrap(~Period, scales="free")
+ggplot(data = periodIHA, aes(y=POS_Hospital, x=Period)) + geom_boxplot(aes(fill=Period)) + facet_wrap(~Period, scales="free")
+
+# ANOVA analysis of the spending based on different periods
+fit1 = lm(formula = periodIHA1$ASPE_Hospital ~ periodIHA1$Period)
+anova (fit1)
+
+# t test to check which pair are significantly from each other
+with(periodAB, t.test(ASPE_Hospital[Period=="AfterIHA"],ASPE_Hospital[Period=="BeforeIHA"]))
+t.test(ASPE_Hospital~ Period, data = periodAB)
+
+with(periodAD, t.test(ASPE_Hospital[Period=="AfterIHA"],ASPE_Hospital[Period=="DuringIHA"]))
+t.test(ASPE_Hospital~ Period, data = periodAD)
+
+with(periodBD, t.test(ASPE_Hospital[Period=="BeforeIHA"],ASPE_Hospital[Period=="DuringIHA"]))
+t.test(ASPE_Hospital~ Period, data = periodBD)
+```
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+###**2.2 Finding the amount spent in each state and grouping it under highest and lowest claim states?** 
+
+```{r descriptive analysis for question 2}
+# Finding the amount spent in each state and grouping it under highest and lowest claim states 
+
+# Setting the path to the folder of the date set and loading the data 
+#setwd("C:\\Users\\leirhyh\\Documents\\Leipersonallife\\UNOclass\\ISQA8086-002\\groupproject\\projectRscript")
+StateSpending <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE) 
+## Removing "NA" values
+StateSpending[is.na(StateSpending)] <- 0
+
+## Creating the subset by filtering the values based on the column "Period"
+StateSpending <- subset(StateSpending, Period == "ComEpisode")
+
+# Grouping the state into Region
+# North East Region
+StateSpending_northeast <- subset(StateSpending, State %in% c("CT", "ME", "MA", "NH", "RI", "VT", "NJ", "PA", "NY"))
+
+# Midwest Region
+StateSpending_midwest <- subset(StateSpending, State %in% c("IN", "IL", "MI", "OH", "WI", "IA", "KS", "MN", "MO", "NE", "ND", "SD"))
+
+# South Region
+StateSpending_south <- subset(StateSpending, State %in% c("DE", "DC", "FL", "GA", "MD", "NC", "SC", "VA", "WV", "AL", "KY", "MS", "TN", "AR", "LA", "OK", "TX"))
+
+# West Region
+StateSpending_west <- subset(StateSpending, State %in% c("AZ", "CO", "ID", "NM", "MT", "UT", "NV", "WY", "AK", "CA", "HI", "OR", "WA"))
+
+# Creating a subset with only Hospital_Name, State, ASPE_State
+
+StateSpending <- StateSpending[, c("Hospital_Name", "State", "ASPE_State")]
+
+## Creating a subset with only Hospital_Name, State, ASPE_State Regionwise
+
+StateSpending_northeast <- StateSpending_northeast[, c("Hospital_Name", "State", "ASPE_State")]
+
+StateSpending_midwest <- StateSpending_midwest[, c("Hospital_Name", "State", "ASPE_State")]
+
+StateSpending_south <- StateSpending_south[, c("Hospital_Name", "State", "ASPE_State")]
+
+StateSpending_south <- StateSpending_south[, c("Hospital_Name", "State", "ASPE_State")]
+
+## Aggregating the total expenditure statewise
+
+AggStateSpending<- aggregate(StateSpending$ASPE_State~StateSpending$State, data = StateSpending, sum)
+
+## Changing the Column names
+
+colnames(AggStateSpending) <- c("State", "ASPE_State")
+AggStateSpending$ASPE_State <- as.numeric(AggStateSpending$ASPE_State)
+
+# Summary table for the Average hospital spending, Statewise
+AggStateSpendingTable <- do.call(cbind.data.frame, aggregate(ASPE_State ~ State, data=AggStateSpending, FUN = function(x) {
+  c("Number"=format(round(length(x), 0), nsmall = 0), M=format(round(mean(x), 5), nsmall = 5), min=min(x),max=max(x), 
+    SD=format(round(sd(x), 2), nsmall = 2),quantile(x,c(0.05, 0.25, 0.50, 0.75, 0.95)), iqr=IQR(x)) })); names(AggStateSpendingTable) <- c("State", "Number", "Mean", "Minimum", "Maximum", "Stanard deviation", "5% Quantile","25% Quantile","Median","75% Quantile", "95% Quantile", "IQR")
+View(AggStateSpendingTable)
+
+
+## Subsetting the Max and Min of the Aggregate State Spendings
+AggStateSpending<- aggregate(StateSpending$ASPE_State~StateSpending$State, data = StateSpending, sum)
+colnames(AggStateSpending) <- c("State", "ASPE_State")
+
+## Statewise Plotting of the Spending
+library(ggplot2)
+ggplot(AggStateSpending, aes(x=State, y = ASPE_State, color = State))+
+   geom_histogram(stat = "identity")+
+   xlab("State")+
+   ylab("Average Spending Per Episode State")+
+   scale_y_continuous(labels=comma)+
+   ggtitle("Graph for spending per state")+
+   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+
+AggStateSpending$ASPE_State = as.integer(AggStateSpending$ASPE_State)
+
+# Reploting the graph after changing the expontential values to numbers
+ggplot(AggStateSpending, aes(x=State, y = ASPE_State, color = State))+
+   geom_histogram(stat = "identity")+
+   xlab("State")+
+   ylab("Average Spending Per Episode State")+
+   scale_y_continuous(labels=comma)+
+   ggtitle("Graph for highest spending per State") +
+   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+# ANOVA analysis of the spending Statewise
+
+fit = lm(formula = AggStateSpending$ASPE_State ~ AggStateSpending$State)
+anova (fit)
+```
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+###**2.3 Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?**
+
+```{r descriptive analysis for question 3}
+# Creating the data frame.
+hosp <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv")
+
+#Removing "NA" values
+hosp[is.na(hosp)] <- 0
+
+# Creating the subset by filtering the values based on the column "Period"
+hosp <- subset(hosp, Period == "ComEpisode")
+
+# Grouping the state into Region
+# North East Region
+hosp_northeast <- subset(hosp, State %in% c("CT", "ME", "MA", "NH", "RI", "VT", "NJ", "PA", "NY"))
+View(hosp_northeast)
+
+#Midwest Region
+hosp_midwest <- subset(hosp, State %in% c("IN", "IL", "MI", "OH", "WI", "IA", "KS", "MN", "MO", "NE", "ND", "SD"))
+
+#South Region
+hosp_south <- subset(hosp, State %in% c("DE", "DC", "FL", "GA", "MD", "NC", "SC", "VA", "WV", "AL", "KY", "MS", "TN", "AR", "LA", "OK", "TX"))
+
+
+#West Region
+hosp_west <- subset(hosp, State %in% c("AZ", "CO", "ID", "NM", "MT", "UT", "NV", "WY", "AK", "CA", "HI", "OR", "WA"))
+
+
+# State wise Plotting
+ggplot(hosp_northeast, aes(x=State, y = ASPE_Hospital, color = State))+
+   geom_histogram(stat = "identity")+
+   xlab("Hospital Name")+
+   ylab("Average Spending Per Episode Hospital")+
+   scale_y_continuous(labels=comma)+
+   ggtitle("Graph for highest spending per hospital in North East Region")
+
+
+#Reploting the graph after changing the expontential to numbers
+ggplot(hosp_northeast, aes(x=State, y = ASPE_Hospital, color = State))+
+   geom_histogram(stat = "identity")+
+   xlab("State with Hospital Names")+
+   ylab("Average Spending Per Episode Hospital")+
+   scale_y_continuous(labels=comma)+
+   ggtitle("Graph for highest spending per hospital in North East Region")
+
+ggplot(hosp_midwest, aes(x=State, y = ASPE_Hospital, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State with Hospital Names")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per hospital in Midwest Region")
+
+ggplot(hosp_south, aes(x=State, y = ASPE_Hospital, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State with Hospital Names")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per hospital in South Region")
+
+ggplot(hosp_west, aes(x=State, y = ASPE_Hospital, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State with Hospital Names")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per hospital in West Region")
+
+#Assigning the dataframes to new dataframes.
+NE <- hosp_northeast
+MW <- hosp_midwest
+S <- hosp_south
+W <- hosp_west
+
+#Add an additonal col called Region for all the subset data frame
+NE$Region <- "North East"
+MW$Region <- "Mid West"
+S$Region <- "South"
+W$Region <- "West"
+
+
+# Sorting the column ASPE_Hospital in the asending order
+NE_sort <- NE[order(NE$ASPE_Hospital, decreasing = TRUE),]
+MW_sort <- MW[order(MW$ASPE_Hospital, decreasing = TRUE),]
+S_sort <- S[order(S$ASPE_Hospital, decreasing = TRUE),]
+W_sort <- W[order(W$ASPE_Hospital, decreasing = TRUE),]
+
+# Assigning the values for comparision
+NE_Firstrow <- head(NE_sort,1)
+MW_Firstrow <- head(MW_sort,1)
+S_Firstrow <- head(S_sort,1)
+W_Firstrow <- head(W_sort,1)
+
+#Bind the rows from multiple dataframes into single data frame
+Region <- rbind(NE_Firstrow,MW_Firstrow,S_Firstrow,W_Firstrow)
+View(Region)
+
+#Select only the required columns
+Region <- Region[,c(1,3,6,12)]
+
+#Combining the Column State and Region to a new Column.
+Region$Zone <- paste(Region$State, "\n", Region$Region)
+
+#Combinging Hospital Name and Zone.
+Region$Hospital <- paste(Region$Hospital_Name, "\n", Region$Zone)
+
+#Plotting the Graph
+p <- ggplot(Region, aes(x=Hospital, y= ASPE_Hospital,fill=Hospital))+
+  geom_histogram(stat="Identity")
+
+p + theme(axis.text.x = element_blank())+
+  xlab("Hospital Name and Zones")+
+  ylab("Average Spending Per Episode Hospital")+
+  ggtitle("Highest spending hospital in USA")
+```
+----------------------------------------------------------------------------------------------------
+
+
+##**3. Visualization with ggplot **
+
+### **The research questions are as follows:**
+3.1 Finding out on which claim type did all the hospital across USA has spent more and also for which period?  
+3.2 Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?  
+3.3 Finding the amount spent in each state and grouping it under highest and lowest claim states?
+
+### **The content of this Assignment**
+1) Set the path of the data and load the file
+2) Loading the library as needed
+3) Subset and transform the data
+4) Produce the summary table for the subsets 
+5) Process of plot using ggplot2 packages
+6) Interpret and explain the figure.
+
+
+###**3.1.1 Plot for which claim type did all the hospital across USA has spent more**
+
+```{r plot for 3.1.1}
+#Setting the path to the folder of the date set, loading the data and checking the data
+#setwd("C:\\Users\\leirhyh\\Documents\\Leipersonallife\\UNOclass\\ISQA8086-002\\groupproject\\projectRscript")
+HospitalSpending <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE)  
+
+#Loading the library
+library(doBy)
+library(DT)
+library(xtable)
+library(ggplot2)
+library(reshape2)
+library(GGally)
+windowsFonts(Times=windowsFont("TT Times New Roman"))
+
+# select three columns of Claim_type, ASPE_Hospital, POS_Hospital for the folowing analyses
+claimtype <- HospitalSpending[, c("Claim_type" , "ASPE_Hospital", "POS_Hospital")]
+
+#change claim_type to full name for analyses
+claimtype$Claim_type <- factor(claimtype$Claim_type, levels=c("Carrier","DME", "HHA", "Hospice", "Inpatient", "Outpatient", "SNF","Total"), labels=c("Carrier", "Durable Medical Equipment","Home Health Agency","Hospice","Inpatient","Outpatient", "Skilled Nursing Facility", "Total"))
+
+# summary table for the hospital spending nationally by claim types ($).
+claimTable <- do.call(cbind.data.frame, aggregate(ASPE_Hospital ~ Claim_type, data=claimtype, FUN = function(x) {
+  c("Number"=format(round(length(x), 0), nsmall = 0), M=format(round(mean(x), 2), nsmall = 2), min=min(x),max=max(x), 
+    se=format(round(sd(x)/sqrt(length(x)), 2), nsmall = 2),format(round(quantile(x,c(0.05, 0.25, 0.50, 0.75, 0.95)), 2), nsmall = 2), iqr=IQR(x)) })); names(claimTable) <- c("Claim Type", "Number", "Mean", "Minimum", "Maximum", "Se", "5% Quantile","25% Quantile","Median","75% Quantile", "95% Quantile", "IQR")
+
+claimTablenew <- claimTable[1:7,c(1,3, 6)]
+colnames(claimTablenew) <- c("claimType", "Mean", "SE")
+
+# change the factor to numeric
+as.numeric.factor <- function(x) {as.numeric(levels(x))[x]}
+claimTablenew$Mean <- as.numeric.factor(claimTablenew$Mean)
+claimTablenew$SE <- as.numeric.factor(claimTablenew$SE)
+claimTablenew <- transform(claimTablenew,  claimType = reorder(claimType, Mean))
+
+
+# Produce the bar chart with ggplot2
+ggplot(claimTablenew, aes(x=claimType, y=Mean, fill=claimType)) +
+  geom_bar(position=position_dodge(.9), colour="black", stat="identity") +
+  geom_errorbar(position=position_dodge(.9), color="red", width=.25, aes(ymin=claimTablenew$Mean - claimTablenew$SE*2, ymax=claimTablenew$Mean + claimTablenew$SE*2)) +
+  scale_fill_manual(values=c("lightblue","green","orange","blue","pink","lightseagreen","mediumvioletred")) +
+  labs(x = "Claim Type", y = "Average Hospital Spending Across USA ($)") +
+  ggtitle("Average Hospital Spending for Each Claim Type\n") + 
+  theme_bw()+
+  theme(panel.grid.major = element_line(color="gray50", size=0.2),
+        panel.grid.major.x=element_blank(), 
+        axis.text.x=element_blank(), 
+        axis.ticks.x=element_blank(),
+        legend.position=c("bottom"),
+        legend.direction = "horizontal", 
+        legend.justification = 0.5, 
+        legend.key = element_rect(fill="black"), legend.background = element_rect(fill="gray"),
+        legend.text =element_text(family="Times", size=10, face="bold", color="gray20"),
+        axis.title.x=element_text(family="Times", color="black",face="bold", size=10, vjust=-1),
+        axis.title.y=element_text(family="Times", color="black", face="bold", size=10, hjust=0.5),
+        axis.text.y = element_text(family="Times", size =10, face="bold", margin = unit(c(t = 0, r = 2.5, b = 0, l = 0), "mm")),
+        axis.line.x = element_line(color = "gray", size = 0.5),
+        axis.line.y = element_line(color = "black", size = 0.5)) + 
+  guides(fill=guide_legend(nrow=2, byrow=TRUE))+
+  scale_y_continuous(breaks=seq(0,20000, 500)) 
+```
+
+**Figure 1.** Average Hospital Spending for Each Claim Type Across USA in 2015.  
+
+####**Figure 1. Interpretation and explanation**
+
+ Figure 1 represents the average hospital spending for each claim type such as carrier, Durable medical equipment, home health agency, hospice, impatient, outpatient and skilled nursing facility based on the hospital spending data in 2015 from the following [links](https://catalog.data.gov/dataset/medicare-hospital-spending-by-claim-61b57). 
+ From Figure 1, we found that the average hospital spending on inpatient is the most, skilled nursing facility, then outpatient, the least is durable medical equipment, during Index Hospital Admission is the most, then 1 through 30 days After Discharge.  This pattern may be explained by multiple costs from doctor, nurse, equipment, room and usually longer time in hospital comparing to other claim types.   
+----------------------------------------------------------------------------------------------------
+
+###**3.1.2 Finding out on which period did all the hospital across USA has spent more** 
+
+```{r plot for 3.1.2}
+# select three columns of Period, ASPE_Hospital, POS_Hospital for the folowing analyses
+periodIHA <- HospitalSpending[, c("Period" , "ASPE_Hospital", "POS_Hospital")]
+
+# summary table for the hospital spending nationally by periods ($).
+periodTable <- do.call(cbind.data.frame, aggregate(ASPE_Hospital ~ Period, data=periodIHA, FUN = function(x) {
+  c("Number"=format(round(length(x), 0), nsmall = 0), M=format(round(mean(x), 2), nsmall = 2), min=min(x),max=max(x),     se=format(round(sd(x)/sqrt(length(x)), 2), nsmall = 2),format(round(quantile(x,c(0.05, 0.25, 0.50, 0.75, 0.95)), 2), nsmall = 2), iqr=IQR(x)) })); names(periodTable) <- c("Periods", "Number", "Mean", "Minimum", "Maximum", "SE", "5% Quantile","25% Quantile","Median","75% Quantile", "95% Quantile", "IQR")
+periodTablenew <- periodTable[c(1,2,4), c(1,3, 6)]
+colnames(periodTablenew) <- c("Periods", "Mean", "SE")
+# change the factor to numeric
+as.numeric.factor <- function(x) {as.numeric(levels(x))[x]}
+periodTablenew$Mean <- as.numeric.factor(periodTablenew$Mean)
+periodTablenew$SE <- as.numeric.factor(periodTablenew$SE)
+
+require(gdata)
+target <- c("BeforeIHA","DuringIHA","AfterIHA")
+periodTablenew$Periods <- reorder.factor(periodTablenew$Periods, new.order=target)
+require(dplyr)
+periodTablenew %>% arrange(Periods) 
+
+View(periodTablenew)
+# Produce the bar chart with error bar by ggplot2
+ggplot(periodTablenew, aes(x=Periods, y=Mean, fill=Periods)) +
+  geom_bar(position=position_dodge(.9), colour="black", stat="identity", width =0.5) +
+  geom_errorbar(position=position_dodge(0.5), color="red", width=.25, aes(ymin=periodTablenew$Mean - periodTablenew$SE*2, ymax=periodTablenew$Mean + periodTablenew$SE*2)) +
+  scale_fill_manual(values=c("green","blue","mediumvioletred")) +
+  labs(x = "Periods", y = "Average Hospital Spending Across USA ($)") +
+  ggtitle("Average Hospital Spending for each period\n") + 
+  theme_bw()+
+  theme(panel.grid.major = element_line(color="gray50", size=0.2),
+        panel.grid.major.x=element_blank(), 
+        axis.text.x=element_blank(), 
+        axis.ticks.x=element_blank(),
+        legend.position=c("bottom"),
+        legend.direction = "horizontal", 
+        legend.justification = 0.5, 
+        legend.key = element_rect(fill="black"), legend.background = element_rect(fill="gray"),
+        legend.text =element_text(family="Times", size=10, face="bold", color="gray20"),
+        axis.title.x=element_text(family="Times", color="black",face="bold", size=10, vjust=-1),
+        axis.title.y=element_text(family="Times", color="black", face="bold", size=10, hjust=0.5),
+        axis.text.y = element_text(family="Times", size =10, face="bold", margin = unit(c(t = 0, r = 2.5, b = 0, l = 0), "mm")),
+        axis.line.x = element_line(color = "gray", size = 0.5),
+        axis.line.y = element_line(color = "black", size = 0.5)) + 
+  scale_y_continuous(breaks=seq(0,20000, 500)) 
+```
+
+**Figure 2.** Average Hospital Spending for Each Period Across USA in 2015. Notes: AfterIHA stands for 1 to 3 days Prior to Index Hospital Admission; BeforeIHA stands for 1 through 30 days After Discharge from Index Hospital Admission; During IHA stands for During Index Hospital Admission.  
+
+####**Figure 2 Interpretation and explanation**
+
+Figure 2 represents the average hospital spending for each period such as 1 to 3 days Prior to Index Hospital Admission; 1 through 30 days After Discharge from Index Hospital Admission and During Index Hospital Admission based on the hospital spending data from the following [links](https://catalog.data.gov/dataset/medicare-hospital-spending-by-claim-61b57). 
+From Figure 2, we found that the average hospital spending on during Index Hospital Admission is the most, then 1 through 30 days After Discharge 
+ from Index Hospital Admission, the least one is1 to 3 days Prior to Index Hospital Admission. This pattern may be due to multiple costs from doctor, nurse, equipment, room in hospital comparing to other periods, which are considerable expensive. 
+----------------------------------------------------------------------------------------------------
+
+###**3.2 Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?**    
+
+```{r Plot for figure 3.2}
+#setwd("C:\\Users\\leirhyh\\Documents\\Leipersonallife\\UNOclass\\ISQA8086-002\\groupproject\\projectRscript")
+hosp <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE)
+
+#Removing "NA" values
+hosp[is.na(hosp)] <- 0
+
+# Creating the subset by filtering the values based on the column "Period"
+hosp <- subset(hosp, Period == "ComEpisode")
+
+# Grouping the state into Region
+# North East Region
+hosp_northeast <- subset(hosp, State %in% c("CT", "ME", "MA", "NH", "RI", "VT", "NJ", "PA", "NY"))
+hosp_northeast <- transform(hosp_northeast,  State = reorder(State, ASPE_Hospital))
+
+
+#Midwest Region
+hosp_midwest <- subset(hosp, State %in% c("IN", "IL", "MI", "OH", "WI", "IA", "KS", "MN", "MO", "NE", "ND", "SD"))
+hosp_midwest <- transform(hosp_midwest,  State = reorder(State, ASPE_Hospital))
+
+#South Region
+hosp_south <- subset(hosp, State %in% c("DE", "DC", "FL", "GA", "MD", "NC", "SC", "VA", "WV", "AL", "KY", "MS", "TN", "AR", "LA", "OK", "TX"))
+hosp_south <- transform(hosp_south,  State = reorder(State, ASPE_Hospital))
+
+#West Region
+hosp_west <- subset(hosp, State %in% c("AZ", "CO", "ID", "NM", "MT", "UT", "NV", "WY", "AK", "CA", "HI", "OR", "WA"))
+hosp_west <- transform(hosp_west,  State = reorder(State, ASPE_Hospital))
+
+library(scales)
+
+
+# Region wise Plotting
+#North East
+
+library(ggplot2)
+ggplot(hosp_northeast, aes(x=State, y = ASPE_Hospital, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("Hospitals with respect to States")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per hospital in North East Region")
+
+ggplot(hosp_midwest, aes(x=State, y = ASPE_Hospital, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("Hospitals with respect to States")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per hospital in Midwest Region")
+
+#South
+ggplot(hosp_south, aes(x=State, y = ASPE_Hospital, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("Hospitals with respect to States")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per hospital in South Region")
+
+#West
+ggplot(hosp_west, aes(x=State, y = ASPE_Hospital, color = State))+
+  geom_histogram(stat = "Identity")+
+  xlab("Hospitals with respect to States")+
+  ylab("Average Spending Per Episode Hospital")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per hospital in West Region")
+
+#Assigning the dataframes to new dataframes.
+NE <- hosp_northeast
+MW <- hosp_midwest
+S <- hosp_south
+W <- hosp_west
+
+#Add an additonal col called Region for all the subset data frame
+NE$Region <- "North East"
+MW$Region <- "Mid West"
+S$Region <- "South"
+W$Region <- "West"
+
+# Sorting the column ASPE_Hospital in the asending order
+NE_sort <- NE[order(NE$ASPE_Hospital, decreasing = TRUE),]
+MW_sort <- MW[order(MW$ASPE_Hospital, decreasing = TRUE),]
+S_sort <- S[order(S$ASPE_Hospital, decreasing = TRUE),]
+W_sort <- W[order(W$ASPE_Hospital, decreasing = TRUE),]
+
+# Assigning the values for comparision
+NE_Firstrow <- head(NE_sort,1)
+MW_Firstrow <- head(MW_sort,1)
+S_Firstrow <- head(S_sort,1)
+W_Firstrow <- head(W_sort,1)
+
+#Bind the rows from multiple dataframes into single data frame
+Region <- rbind(NE_Firstrow,MW_Firstrow,S_Firstrow,W_Firstrow)
+
+#Select only the required columns
+#Region <- Region[,c(1,3,6,13)]
+Region <- Region[,c("Hospital_Name","State","ASPE_Hospital","Region")]
+#Combining the Column State and Region to a new Column.
+Region$Zone <- paste(Region$State, "\n", Region$Region)
+
+#Combinging Hospital Name and Zone.
+Region$Hospital <- paste(Region$Hospital_Name, "\n", Region$Zone)
+
+library(ggplot2)
+library(ggthemes)
+library(scales)
+p <- ggplot(Region, aes(x=Hospital, y= ASPE_Hospital,fill=Hospital, label=ASPE_Hospital))+
+  geom_histogram(stat="Identity")
+
+#  Highest spending hospital in USA
+# Finding the leading hospital in terms of spending based on the US zones and also finding the differences in spending by hospital on zone level?
+
+#Graph for answering the above question
+p + theme_solarized(light = TRUE) +
+  scale_colour_solarized("red")+
+  theme(axis.text.x = element_blank())+
+  xlab("Hospital Name and Zones")+
+  ylab("Average Spending Per Episode Hospital")+
+  ggtitle("Highest spending hospital in USA")+
+  geom_text(size = 3, position = position_stack(vjust = 1.05),color="red")
+
+library(ggmap)
+write.csv(Region,"Region.csv")
+r <- read.csv("Region.csv")
+geocodes <- geocode(as.character(r$State))
+r1 <- data.frame(r[,1:7],geocodes)
+
+
+all_states <- map_data("state")
+s <- ggplot()
+s <- s + geom_polygon( data=all_states, aes(x=long, y=lat, group = group),colour="white", fill="grey10" )
+
+#Same result represented in different way using MAP
+s1 <- s +  geom_jitter( data=r1, position=position_jitter(width=0.5, height=0.5), aes(x=lon, y=lat, size = ASPE_Hospital, color=Hospital_Name))+
+  scale_color_discrete(name="Hospital")+
+  geom_text( data=r1, hjust=0.5, vjust=-2, aes(x=lon, y=lat, label=Hospital_Name), colour="magenta2", size=2 )+
+  scale_size_continuous(range = c(5,9),guide = FALSE)+
+  theme(panel.background = element_rect(fill = 'white', colour = 'red'))+
+  theme(legend.position="bottom")+
+  theme(legend.text=element_text(size=5))
+s1
+
+summary(Region)
+
+```
+
+
+###**Interpretation and Explanation**
+
+Details about all the hospitals in USA who spend on patients over various claim types per year is present in particular dataset. Based on regions, We wanted to find the hospitals who spent more money on patients.  
+
+Graph below, represents highest spending hospital by region.  
+
+From the graph we can infer that, **Foundation Surgical hospital from Texas** has spent more money on its patients in South region. Similarly **Hackensack University medical center**,**Kings daughters medical center** and **Los Angeles** hospitals have spent good amount on patients in their regions. If we compare between the highest spending hospital from the graph then **Foundation Surgical hospital from Texas** has spent more when compared to **Hackensack University medical center**.  
+
+
+
+###**3.3 Finding the amount spent in each state and grouping it under highest and lowest claim states?** 
+
+
+```{r plot for 3.3}
+# Finding the amount spent in each state and grouping it under highest and lowest claim states 
+
+# Setting the path to the folder of the date set and loading the data 
+setwd("C:\\Users\\leirhyh\\Documents\\Leipersonallife\\UNOclass\\ISQA8086-002\\groupproject\\projectRscript")
+
+StateSpending <- read.csv("Medicare_Hospital_Spending_by_Claim_Cleaned.csv", stringsAsFactors = FALSE)  
+
+
+# Removing "NA" values
+StateSpending[is.na(StateSpending)] <- 0
+
+# Creating the subset by filtering the values based on the column "Period"
+StateSpending <- subset(StateSpending, Period == "ComEpisode")
+
+# North East Region
+StateSpending_northeast <- subset(StateSpending, State %in% c("CT", "ME", "MA", "NH", "RI", "VT", "NJ", "PA", "NY"))
+
+# Midwest Region
+StateSpending_midwest <- subset(StateSpending, State %in% c("IN", "IL", "MI", "OH", "WI", "IA", "KS", "MN", "MO", "NE", "ND", "SD"))
+
+# South Region
+StateSpending_south <- subset(StateSpending, State %in% c("DE", "DC", "FL", "GA", "MD", "NC", "SC", "VA", "WV", "AL", "KY", "MS", "TN", "AR", "LA", "OK", "TX"))
+
+# West Region
+
+StateSpending_west <- subset(StateSpending, State %in% c("AZ", "CO", "ID", "NM", "MT", "UT", "NV", "WY", "AK", "CA", "HI", "OR", "WA"))
+
+# Creating a subset with only Hospital_Name, State, ASPE_State
+StateSpending <- StateSpending[, c("Hospital_Name", "State", "ASPE_State")]
+
+# Creating a subset with only Hospital_Name, State, ASPE_State Regionwise
+StateSpending_northeast <- StateSpending_northeast[, c("Hospital_Name", "State", "ASPE_State")]
+StateSpending_midwest <- StateSpending_midwest[, c("Hospital_Name", "State", "ASPE_State")]
+StateSpending_south <- StateSpending_south[, c("Hospital_Name", "State", "ASPE_State")]
+StateSpending_west <- StateSpending_west[, c("Hospital_Name", "State", "ASPE_State")]
+
+AggStateSpending<- aggregate(StateSpending$ASPE_State~StateSpending$State, data = StateSpending, sum)
+colnames(AggStateSpending) <- c("State", "ASPE_State")
+AggStateSpending[which.min(AggStateSpending$ASPE_State), ]
+AggStateSpending[which.max(AggStateSpending$ASPE_State), ]
+
+
+
+# Statewise Plotting of the Spending
+ggplot(AggStateSpending, aes(x=State, y = ASPE_State, color = State))+
+  geom_histogram(stat = "identity")+
+  xlab("State")+
+  ylab("Average Spending Per Episode State")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for spending per state")+
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+  
+# Reploting the graph after changing the expontential values to numbers
+ggplot(AggStateSpending, aes(x=State, y = ASPE_State, color = State))+
+  geom_histogram(stat = "identity")+
+  xlab("State")+
+  ylab("Average Spending Per Episode State")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per State")+
+  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+# Ordered Bar graph
+
+  ggplot(AggStateSpending, aes(x=State, y=ASPE_State))+ 
+  geom_bar(stat="identity", width=.5, fill="tomato3")+ 
+  labs(title="Ordered Statewise Spending", subtitle="State Vs ASPE_State")+ 
+  scale_y_continuous(labels=comma)+
+  theme(axis.text.x=element_text(size=6,angle = 90), axis.ticks.x=element_blank())
+  
+## Reploting the graph after changing the expontential to numbers
+ggplot(StateSpending_northeast, aes(x=State, y = ASPE_State))+
+  geom_histogram(stat = "identity")+
+  xlab("State")+
+  ylab("Average Spending Per Episode State")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per State in North East Region")
+
+ggplot(StateSpending_midwest, aes(x=State, y = ASPE_State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State")+
+  ylab("Average Spending Per Episode State")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per State in Midwest Region")
+
+
+ggplot(StateSpending_south, aes(x=State, y = ASPE_State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State")+
+  ylab("ASPE_State")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per State in South Region")
+
+
+ggplot(StateSpending_west, aes(x=State, y = ASPE_State))+
+  geom_histogram(stat = "Identity")+
+  xlab("State")+
+  ylab("ASPE_State")+
+  scale_y_continuous(labels=comma)+
+  ggtitle("Graph for highest spending per State in West Region")
+
+```
+
+###**Interpretation and Explanation**
+As you can see from the figure **Texas** spends the **most** and **Vermont** spends the **least**. The interesting thing, both are based in the South region of the USA. But Texas has substantially more population than that of Vermont. Throughout the country, the Medicare spending by hospitals were consistent with the population density. 
