@@ -20,9 +20,9 @@ The copyright notice and this permission notice shall be included in all copies 
 5. Presentation slides of the project [click here for presentation](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/8086-02-presentation.pdf)
 6. Summary of team individual Contribution to the project [click here for contribution file](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/Contribution.md)  
 
-## Summary on the deliverables thorughout the Semester
+## Summary on the deliveries thorughout the Semester
 
-**Readme files for all the deliveries can be found by clicking on the link below.**  
+**Readme files for all the deliverables can be found by clicking on the link below.**  
 
 1. _[Work Plan & RQ](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Work%20plan%20-%20RQ/DataCreatives_WorkPlan_WorkPlan.md)_  
 2. _[Data Cleaning Documentations](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Data%20Cleaning%20Documentation.md)_  
