@@ -22,9 +22,9 @@ The copyright notice and this permission notice shall be included in all copies 
 
 ## Summary on the deliverables thorughout the Semester
 
-**Readme files for all the deliverables can be found by clicking on the link below.**  
+**Readme files for all the deliveries can be found by clicking on the link below.**  
 
-1. **[Work Plan & RQ]**(https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Work%20plan%20-%20RQ/DataCreatives_WorkPlan_WorkPlan.md)  
+1. **[Work Plan & RQ](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Work%20plan%20-%20RQ/DataCreatives_WorkPlan_WorkPlan.md)**  
 2. [Data Cleaning Documentations](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Data%20Cleaning%20Documentation.md)  
 3. [R-Scripts](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/R-Script/R-Script.md)  
 4. [R-Plots](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/RPlots/Readme.md)  
