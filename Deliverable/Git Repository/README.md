@@ -15,19 +15,19 @@ The copyright notice and this permission notice shall be included in all copies 
    * Data cleaning
    * Descriptive analysis 
    * Plots
-3. Audience Persona [click here for audience PDF](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/Audience%20Persona.pdf)
-4. Summary of the project [click here for summary PDF](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/Summary.pdf)
-5. Presentation slides of the project [click here for for presentation PDF](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/8086-02-presentation.pdf)
+3. Audience Persona [click here for persona](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/Audience%20Persona.pdf)
+4. Summary of the project [click here for summary](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/Summary.pdf)
+5. Presentation slides of the project [click here for presentation](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/8086-02-presentation.pdf)
 6. Summary of team individual Contribution to the project [click here for contribution file](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Git%20Repository/Contribution.md)  
 
 ## Summary on the deliverables thorughout the Semester
 
 **Readme files for all the deliveries can be found by clicking on the link below.**  
 
-1. **[Work Plan & RQ](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Work%20plan%20-%20RQ/DataCreatives_WorkPlan_WorkPlan.md)**  
-2. [Data Cleaning Documentations](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Data%20Cleaning%20Documentation.md)  
-3. [R-Scripts](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/R-Script/R-Script.md)  
-4. [R-Plots](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/RPlots/Readme.md)  
-5. [Audience Persona](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Audience%20Persona/Audience%20Persona.md)  
-6. [Presentation](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Presentation/README.md)  
-7. [Git Repository](https://github.com/vnikesh/8086-002---Project/edit/master/Deliverable/Git%20Repository/README.md)  
+1. _[Work Plan & RQ](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Work%20plan%20-%20RQ/DataCreatives_WorkPlan_WorkPlan.md)_  
+2. _[Data Cleaning Documentations](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Data%20Cleaning%20Documentation/Data%20Cleaning%20Documentation.md)_  
+3. _[R-Scripts](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/R-Script/R-Script.md)_  
+4. _[R-Plots](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/RPlots/Readme.md)_  
+5. _[Audience Persona](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Audience%20Persona/Audience%20Persona.md)_  
+6. _[Presentation](https://github.com/vnikesh/8086-002---Project/blob/master/Deliverable/Presentation/README.md)_  
+7. _[Git Repository](https://github.com/vnikesh/8086-002---Project/edit/master/Deliverable/Git%20Repository/README.md)_  
