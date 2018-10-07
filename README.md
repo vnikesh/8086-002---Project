@@ -1,24 +1,36 @@
-# Team Name - Data Creatives 
+# Medicare Spending Trend Analysis for all the hospitals in USA
 
-### Members of the Team
-1. Nikesh
-2. Pooja
-3. Runhua
+### About the Set:  
 
-### Top Priorities of Data Sets
+1) We are using the Dataset showing the Medicare Spending per beneficiary in the year 2015(CMS.gov).  
+2) An MSPB episode includes all Medicare Part A and Part B claims paid during the period from 3 days prior to a hospital admission through 30 days after discharge.  
+3) These average Medicare payment amounts have been price-standardized to remove the effect of geographic payment differences and add-on payments for indirect medical education (IME) and disproportionate share hospitals (DSH).  
 
-**#1 Medicare Spending :-**  
- We want to work on this data set as Nikesh has gone through the data set and has fair knowleadge on what has to been done with data. He also has few documents with respect to this Data Set which might help us in understading the data set.
- 
-**#2 Air Quality and Greenhouse Gas Emission :-**  
- Air pollution in one of the major problem in the atmosphere. To solve the problem of air pollution, it's necessary to understand levels of harmful gases, and the issues that it causes and look for ways to counter it. Pooja has an additional data set which will suppliment this data set during analysis.
+### Tools and Packages Used:
+1) R
+2) R-Studio
+3) ggplot
 
-**#3 Tobacco Use :-**  
- Tobacco use is the leading cause of preventable illness and death in the United States. 
-The harmful effects of tobacco do not end with the user. There is no risk-free level of exposure to secondhand smoke
-It causes many different cancers as well as chronic lung diseases such as emphysema and bronchitis, 
-heart disease, pregnancy-related rpoblems, and many other serious health problems. 
-It will be intersting to see how different tobacco use to relate the disease and how to use all kinds of way to educate people reduce or even stope smoking.
+### Questions Addressed:  
 
-**#4 Indian Groundwater :-**  
- Statistics about India’s groundwater depletion are depressing, we would like to go through the data and see what are the reasons for the groundwater depletion in India. So that we can come up with some useful solution.
+1) On which claim type did all the hospitals across the US have spent more and also for which period type?  
+2) What is the amount spent in each state and who are the highest and lowest claim states?  
+3) Which is the leading hospital in terms of spending based on the US zones and what are the differences in spending by hospital on zone level?  
+
+### Why is it important?  
+1) Patterns of hospital spending across the country affect the medicare policies.  
+2) Information of hospital spending across the country is related to health insurance and optimizing it can improve the quality of healthcare.  
+3) Understanding the reasons for geographical variation in Medicare Spending could provide an opportunity for reducing overall health care spending.  
+
+### Limitations of the Dataset  
+1) The data is secondary data from averaging hospital spending.   
+2) The data is limited to the average of hospital spending for the year of 2015.  
+3) The supplementary data for supporting our finding, for example population density.  
+
+### Data Manipulation  
+1) Start date and end date were removed because they are same across all the rows.  
+2) Symbols like $ and % were changed to numbers.  
+3) Abbreviated column names like period data, claim type and hospital for better representation on the graph.  
+4) Removed unnecessary rows with the value 0.  
+5) R packages and Rstudio was used to analyse and generate plots.  
+

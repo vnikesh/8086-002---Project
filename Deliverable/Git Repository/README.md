@@ -1,9 +1,7 @@
-## Team Name: Data Creatives
-**Team Project: Medicare Spending per Beneficiary**  
-**Members: -**  
+## Project: Medicare Spending per Beneficiary**  
+**Member: -**  
 _Nikesh_  
-_Pooja_  
-_Runhua_  
+
 
 ## License of this package
 The following conditions are met while Redistributing and using in source and binary forms, with or without modification. 
